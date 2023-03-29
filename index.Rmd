@@ -41,6 +41,25 @@ p2_scatter <- cv_states_today_scatter %>%
   layout(title = "Naive Case Fatality Rate (CFR) vs. population density",
                   yaxis = list(title = "Naive CFR"), xaxis = list(title = "Population Density"),
          hovermode = "compare")
+
+p3_bar <- cv_states_today %>% 
+  plot_ly(x = ~per100k, y = ~state, type = "bar", color = ~state, 
+          hoverinfo = 'text', 
+          text = ~paste( paste(state, ":", sep = ""), paste(" Cases per 100k: ", per100k, sep=""), paste(" Deathers per 100k: ", deathsper100k, sep=""), sep = "<br>")) %>% 
+  layout(title = "Cumulative cases per 100k per state (as of March 23rd)", 
+         xaxis = list(title = "Cases per 100k"),
+         yaxis = list(title = "State"),
+         hovermode = "compare")
+
+p4_bar <- cv_states_today %>% 
+  plot_ly(x = ~naive_CFR, y = ~state, type = "bar", color = ~state, 
+          hoverinfo = 'text', 
+          text = ~paste( paste(state, ":", sep = ""), paste(" Cases per 100k: ", per100k, sep=""), paste(" Deaths per 100k: ", deathsper100k, sep=""), sep = "<br>")) %>% 
+  layout(title = "Naive Case Fatality Rate per state (as of March 23rd)", 
+         xaxis = list(title = "Naive CFR"),
+         yaxis = list(title = "State"),
+         hovermode = "compare")
+
 ```
 
 
@@ -57,6 +76,18 @@ p1_scatter
 
 ```{r}
 p2_scatter
+```
+
+### Figure 3
+
+```{r}
+p3_bar
+```
+
+### Figure 4
+
+```{r}
+p4_bar
 ```
 
 
