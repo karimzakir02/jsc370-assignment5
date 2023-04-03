@@ -51,3 +51,37 @@ data %>%
   )
 ```
 
+```{r}
+data$month <- format(data$pub_date, "%m")
+```
+
+```{r}
+most_common_categories <- data %>% 
+  group_by(section_name) %>% 
+  summarise(n = n()) %>% 
+  top_n(n, n = 8)
+data %>% 
+  group_by(section_name, month) %>% 
+  summarise(count = n()) %>% 
+  right_join(most_common_categories) %>% 
+  plot_ly(
+    x = ~month,
+    y = ~count,
+    color = ~section_name,
+    type = "scatter",
+    mode = "lines"
+  ) %>% 
+  layout(
+    title = "No. Articles In the Top 8 Sections Each Month in 2022",
+    xaxis = list(
+      title = "Month"
+    ),
+    yaxis = list(
+      title = "No. Articles"
+    ),
+    legend = list(
+      title = list(text = "Section Name")
+    )
+  )
+```
+
