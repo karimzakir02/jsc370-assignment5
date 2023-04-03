@@ -1,10 +1,16 @@
 name: "my-website"
 output_dir: "."
 navbar:
-  title: "Karim's Website"
+  title: "Assignment 5: Karim Zakir"
   left:
-    - text: "Home"
+    - text: "Page 1"
       href: index.html
+    - text: "Page 2"
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/karimzakir02/lab12-website
+    - icon: fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/karim-zakir-172124171/
 output:
   html_document:
     theme: spacelab
