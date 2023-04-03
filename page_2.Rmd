@@ -15,3 +15,9 @@ library("tidyverse")
 library("plotly")
 data <- read_csv("data/data.csv")
 ```
+
+Do amount of articles per month per section
+
+```{r}
+```
+

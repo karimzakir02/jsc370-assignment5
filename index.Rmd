@@ -13,7 +13,41 @@ This is my JSC370 Assignment 5 website.
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 library("tidyverse")
 library("plotly")
+library("tidytext")
 data <- read_csv("data/data.csv")
 ```
 
+
+```{r}
+words_per_section <- data %>% 
+  unnest_tokens(word, title) %>% 
+  group_by(section_name) %>% 
+  summarise(word_count = n())
+
+data %>% 
+  group_by(section_name) %>% 
+  summarize(n = n()) %>% 
+  inner_join(words_per_section) %>% 
+  arrange(n) %>% 
+  plot_ly(
+    y = ~reorder(section_name, n),
+    x = ~n,
+    type = "bar",
+    hoverinfo = "text",
+    text = ~paste(
+      "Section Name:", section_name, "\n",
+      "Articles in 2022:", n, "\n",
+      "Word Count in 2022:", word_count, "\n"
+    )
+  ) %>% 
+  layout(
+    title = "No. Articles Written in 2022 Per Section",
+    xaxis = list(
+      title = "No. Articles in 2022"
+    ),
+    yaxis = list(
+      title = "Section Name"
+    )
+  )
+```
 
