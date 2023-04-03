@@ -1,0 +1,17 @@
+---
+title: "JSC370 Assignment 5: Page 2"
+author: "Karim Zakir"
+output: 
+    html_document:
+        toc: TRUE
+        toc_float: TRUE
+---
+
+This is the second page for JSC370 assignment 5.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("tidyverse")
+library("plotly")
+data <- read_csv("data/data.csv")
+```

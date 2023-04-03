@@ -1,5 +1,5 @@
 ---
-title: "JSC370 Assignment 5"
+title: "JSC370 Assignment 5: Page 1"
 author: "Karim Zakir"
 output: 
     html_document:
