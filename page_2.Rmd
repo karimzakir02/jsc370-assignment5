@@ -10,9 +10,66 @@ output:
 This is the second page for JSC370 assignment 5.
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 library("tidyverse")
 library("plotly")
 data <- read_csv("data/data.csv")
 ```
+
+```{r}
+sw_regex <- paste0(" ", paste0(stop_words$word ,collapse = " | ")) %>% paste0(" s")
+data$no_sw_title <- str_replace_all(data$title, sw_regex, " ")
+data$headline_no_sw_word_count <- lengths(strsplit(data$no_sw_title, " "))
+```
+
+```{r}
+us_data <- data %>%
+  filter(section_name == "U.S.")
+world_data <- data %>% 
+  filter(section_name == "World")
+business_data <- data %>% 
+  filter(section_name == "Business Day")
+art_data <- data %>% 
+  filter(section_name == "Arts")
+sports_data <- data %>% 
+  filter(section_name == "Sports")
+
+fig <- plot_ly(us_data, x = ~headline_no_sw_word_count, type = "histogram", visible = T, alpha=0.6, nbinsx=20)
+fig <- fig %>% add_histogram(x = ~world_data$headline_no_sw_word_count, type = "histogram", visible = F)
+fig <- fig %>% add_histogram(x = ~business_data$headline_no_sw_word_count, type = "histogram", visible = F)
+fig <- fig %>% add_histogram(x = ~art_data$headline_no_sw_word_count, type = "histogram", visible = F)
+fig <- fig %>% add_histogram(x = ~sports_data$headline_no_sw_word_count, type = "histogram", visible = F)
+
+fig <- fig %>% layout(
+  title = "Headline Word Count Distribution in 2022",
+  xaxis = list(title = "Headline Word Count"),
+  yaxis = list(title = "No. Articles in 2022"),
+  updatemenus = list(
+    list(
+      y = 0.9,
+      buttons = list(
+        list(method = "restyle",
+             args = list("visible", list(TRUE, FALSE, FALSE, FALSE, FALSE)),
+             label = "U.S."),
+
+        list(method = "restyle",
+             args = list("visible", list(FALSE, TRUE, FALSE, FALSE, FALSE)),
+             label = "World News"),
+        list(method = "restyle",
+             args = list("visible", list(FALSE, FALSE, TRUE, FALSE, FALSE)),
+             label = "Business Day"),
+        list(method = "restyle",
+             args = list("visible", list(FALSE, FALSE, FALSE, TRUE, FALSE)),
+             label = "Arts"),
+        list(method = "restyle",
+             args = list("visible", list(FALSE, FALSE, FALSE, FALSE, TRUE)),
+             label = "Sports")
+      )
+    )
+  )
+) %>% hide_legend()
+
+fig
+```
+
 
