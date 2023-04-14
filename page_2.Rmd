@@ -72,4 +72,5 @@ fig <- fig %>% layout(
 fig
 ```
 
+The above plot shows the word count distribution in the headlines for each section. These distributions are unimodal and seem to peak at around 8 words a headline. Based on these plots, it also seems that these distributions have similar standard deviations and tail widths, suggesting that length doesn't vary much between each section. Some sections, however, still have some outliers, like Sports, which has headlines with 15 or more words, unlike other sections, which tend to have headlines of at most 14 words. 
 

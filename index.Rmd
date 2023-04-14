@@ -51,6 +51,8 @@ data %>%
   )
 ```
 
+In the above plot, we can see that the most prominent section in the NYT is the U.S. section followed by the World sections, which makes sense, since the newspapers is based out of U.S. Some sections appear only once or twice in the dataset, like At Home or Sunday Review sections, suggesting they are not popular. This also suggests that if we use them in the data, then the data won't be representative of that section, since the sample size quite small. 
+
 ```{r}
 data$month <- format(data$pub_date, "%m")
 ```
@@ -85,3 +87,4 @@ data %>%
   )
 ```
 
+In the plot above, we can see how the frequency of each section fluctuated throughout 2022. U.S and World sections stayed consistently on top throughout the year. Based on this section, we may also perhaps infer how popular a particular industry or sphere is in any given month. For instance, the Movies section gets a boost during the month of September, suggesting an increase in movie releases during September. This particular increase might also be related to the Toronto International Film Festival, which happened during September in 2022. 
